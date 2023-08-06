@@ -126,7 +126,7 @@ while (i <= number1)
 
 
 
-Задача 4
+Задача 3
 /* программа, которая на вход трехзначное число и на выходе показывает последнюю цифру этого числа
 456 - 6
 782 - 2 
@@ -141,6 +141,183 @@ int a = int.Parse(userInput1);
 int i = a % 10;
 
 Console.Write($"{a} -> {i}");
+
+
+
+
+
+Задача 4
+﻿// Задача 4
+Console.WriteLine("Введите первое число");
+string number1 = Console.ReadLine() ?? "";
+int a = int.Parse(number1);
+
+Console.WriteLine("Введите второе число");
+string number2 = Console.ReadLine() ?? "";
+int b = int.Parse(number2);
+
+Console.WriteLine("Введите третье число");
+string number3 = Console.ReadLine() ?? "";
+int c = int.Parse(number3);
+
+int max;
+
+if (a > b)
+{
+    max = a;
+}
+else
+{
+    max = b;
+}
+if (c > max)
+{
+    max = c;
+}
+
+Console.Write("Максимальное число ");
+Console.WriteLine(max);
+
+
+
+
+
+
+Задача 5
+//void (пустота) - процедура которая похожа на функцию, но не возвращает никаких значений
+void FillArray(int[] collection) // обозначаем процедуру с названием FillArray (заполнения массива) на вход данной процедуры должен поступать массив
+{
+    int length = collection.Length;   // целочисленная переменная length (длина) в которую помещаем значение метода Length (возвращает длину или количество элементов массива)
+    int index = 0;
+    while (index < length)
+    {
+       collection[index] = new Random() .Next(1, 10);
+        //index = index +1
+        index ++;
+    }
+}
+
+void PrintArray(int[] col) // процедура с названием PrintArray(печать массива) для вывода массива в консоле
+{
+    int count = col.Length; //count - подсчет
+    int position = 0;
+    while (position < count)
+    {
+        Console.WriteLine(col[position]);
+        position ++;
+    }
+}
+
+int indexOF(int[] collection, int find) // функция целочисленного числа с названием indexOF, на вход поступают2 переменные: 1 массив, 2 элемент индекс которого мы должны найти
+{
+    int count = collection.Length; 
+    int index = 0;
+    int position = -1;
+    while (index < count)
+    {
+        if(collection[index]== find)
+        {
+            position = index; 
+            break; // прерывание цикла
+        }
+        index++;
+    }
+    return position; //возвращает значение того же типа данных как и функция, после выполнения данной функции
+}
+
+int [] array = new int [10];
+
+FillArray(array); // на вход процедуры мы впускаем массив под названием array который назначили выше
+array[4] = 4;
+array[6] = 4;
+
+PrintArray(array);
+Console.WriteLine();
+
+int pos = indexOF(array, 444);
+Console.WriteLine(pos);
+
+
+
+
+
+
+
+Задача 6
+﻿// задача 6: Напишите программу, которая на вход принимает число и выдает, является ли число четным (делится ли оно на два без остатка)
+
+Console.WriteLine("Введите число");
+string number = Console.ReadLine() ?? "";
+int even = int.Parse(number);
+
+if (even % 2 == 0)
+{
+    Console.WriteLine("четное");
+}
+else
+{
+    Console.WriteLine("не четное");
+}
+
+
+
+
+Задача 8
+﻿// Напишите программу, которая на вход принимает число N, а на выходе показывает все четные числа от 1 до N
+
+Console.WriteLine("Введите число");
+string number = Console.ReadLine() ?? "";
+int N = int.Parse(number);
+int index = 2;
+
+while(index <= N)
+{
+    Console.Write($"{index} ");
+    index = index + 2;
+}
+
+
+
+
+
+Задача 9
+/*программа, которая выводит случайное трехзначное число и удаляет вторую цифру этого числа
+456 -> 46
+782 -> 72
+918 - > 98
+*/
+
+int num = new Random ().Next(100,1000);
+int a1 = num / 100;
+int a2 = num % 10;
+int resalt = a1 * 10 + a2;
+Console.WriteLine($"num = {num}, resalt = {resalt}");
+
+
+
+
+Задача 10 
+﻿/* Напишите программу, которая принимает на вход трёхзначное число и на выходе показывает вторую цифру этого числа.
+456 -> 5
+782 -> 8
+918 -> 1
+*/
+
+Console.WriteLine("Введите трехзначное число ");
+int num = int.Parse(Console.ReadLine() ?? "");
+
+if (num <= 99 || num >= 1000)
+{
+    Console.WriteLine("Читай внимательнее, человек!");
+    return; 
+}
+
+int a1 = num / 10;
+int a2 = a1 % 10;
+Console.WriteLine($"num = {num}, resalt = {a2}");
+
+
+
 
 
 
@@ -182,6 +359,38 @@ else
 
 
 
+Задача 13
+﻿/* Напишите программу, которая выводит третью цифру заданного числа или сообщает, что третьей цифры нет.
+645 -> 5
+78 -> третьей цифры нет
+32679 -> 6
+*/
+
+Console.WriteLine("Введите число ");
+long num = long.Parse(Console.ReadLine() ?? "");    // при вводе больших чисел ошибка: Value was either too large or too small for an Int32. Поэтому стоит long
+    
+if (num <= 99) 
+{
+    Console.WriteLine($"num = {num}, resalt = третьей цифры нет");
+    return;
+}
+
+long s = 1;  //переменная на которую делится N значное число 
+while(true)
+{
+    if (num >= 1000 * s)  //находим насколько нужно разделить число перед нахождением отстатка отделения, чтоб осталось 3 первых цыфры
+        s = s * 10;
+    else break;
+}
+    
+long a2 = num / s;
+a2 = a2 % 10;
+
+Console.WriteLine($"num = {num}, resalt = {a2}");
+
+
+
+
 Задача 14
 // Напишите программу,которая принимает на вход число и проверяет,  кратно ли оно одновременно 7 и 23
 
@@ -197,6 +406,44 @@ else
     Console.WriteLine("Число не кратно 7 и 23");  //Console.WriteLine($"{a} -> нет")
 
 
+
+
+Задача 15
+﻿/* Напишите программу, которая принимает на вход цифру, обозначающую день недели, и проверяет, является ли этот день выходным.
+6 -> да
+7 -> да
+1 -> нет
+*/
+
+Console.Write("Введите число от 1 до 7: ");
+int number = int.Parse(Console.ReadLine() ?? "");
+
+if (number <= 0 || number >= 8)
+{
+    Console.WriteLine("Читай внимательнее, человек! Такого дня недели не существует!");
+    return; 
+}
+if (number == 1)
+    Console.WriteLine("Понедельник "); // можно сократить убрав перечисление дней недели
+if (number == 2)
+    Console.WriteLine("Вторник ");
+if (number == 3)
+    Console.WriteLine("Среда ");
+if (number == 4)
+    Console.WriteLine("Четверг ");
+if (number == 5)
+    Console.WriteLine("Пятница ");
+if (number == 6)
+    Console.WriteLine("Суббота ");
+if (number == 7)
+    Console.WriteLine("Воскресенье ");
+if (number <= 5)
+  Console.WriteLine("Рабочий день");
+if (number >= 6)
+    Console.WriteLine("Выходной день");
+
+
+    
 
 
     Задача 16
@@ -255,6 +502,110 @@ else if (Qvdrnt == 3) Console.WriteLine ("X = (-oo...0), Y = (-oo...0)");
 else if (Qvdrnt == 4) Console.WriteLine ("X = (0...+oo), Y = (-oo...0)");
 else Console.WriteLine("Неверно введен номер квадрата");
 }
+
+
+
+
+задача 19
+﻿/* Напишите программу, которая принимает на вход пятизначное число и проверяет, является ли оно палиндромом.
+14212 -> нет
+23432 -> да
+12821 -> да
+*/
+
+int Prompt(string message)
+{
+    Console.Write(message);
+    string value = Console.ReadLine() ?? "";
+    int result = Convert.ToInt32(value);
+    return result;
+}
+
+void GetNRank(int number)
+{
+    if (number / 10000 == number %10 && number / 1000 % 10 == number % 100 / 10)
+    Console.WriteLine("Число является полиндромом");
+    else 
+    Console.WriteLine("Число НЕ является полиндромом");
+}
+
+bool ValidateNumber(int number)
+{
+    if (number < 10000 || number > 99999)
+    {
+        Console.WriteLine("Ошибка ввода числа, попробуй еще");
+        return false;
+    }
+    return true;
+}
+
+int number = Prompt("Введите пятизначное число ");
+if (ValidateNumber(number))
+{
+    GetNRank(number);
+}
+
+
+
+
+Задача 21
+﻿/* Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.
+A (3,6,8); B (2,1,-7), -> 15.84
+A (7,-5, 0); B (1,-1,9) -> 11.53
+*/
+
+int Prompt (string message)
+{
+    Console.WriteLine(message);
+    string value = Console.ReadLine()?? "";
+    int result = Convert.ToInt32(value);
+    return result;
+}
+
+int Xa = Prompt("Введите первое число первой координаты ");
+int Ya = Prompt("Введите второе число первой координаты ");
+int Za = Prompt("Введите третье число первой координаты ");
+
+int Xb = Prompt("Введите первое число второй координаты ");
+int Yb = Prompt("Введите второе число второй координаты ");
+int Zb = Prompt("Введите третье число второй координаты ");
+
+Console.WriteLine($"Первая координата: {Xa}{Ya}{Za}");
+Console.WriteLine($"Вторая координата: {Xb}{Yb}{Zb}");
+
+Console.WriteLine($"Расстояние между точками координат в 3D пространстве составляет: {Math.Sqrt(Math.Pow((Xa-Xb),2) + Math.Pow((Ya-Yb),2) + Math.Pow((Za-Zb),2))}");
+
+
+
+
+задача 23
+﻿/* Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.
+3 -> 1, 8, 27
+5 -> 1, 8, 27, 64, 125
+*/
+
+int Prompt (string message)
+{
+    Console.WriteLine(message);
+    string value = Console.ReadLine()?? "";
+    int result = Convert.ToInt32(value);
+    return result;
+}
+int N = Prompt("Введите число ");
+
+void NumRes (int N)
+{
+int i = 1;
+while (i <= N)
+{
+    if (i == N)
+        Console.Write ($"{Math.Pow((i),3)} ");
+    else
+        Console.Write ($"{Math.Pow((i),3)}, ");
+    i++;
+}
+}
+NumRes (N);
 
 
 
@@ -335,3 +686,71 @@ int GetNumberFromUser(string message, string errorMessage)
     }
 }
 
+
+
+Задача 28
+/* Напишите программу, которая
+принимает на вход число N и выдаёт
+произведение чисел от 1 до N.
+4 -> 24
+5 -> 120
+*/
+
+Console.Clear();
+int num = GetNumberFromUser("Введите целое число A: ","Ошибка ввода!");
+int proiz = GetProiz(num);
+Console.WriteLine($"{num} -> {proiz}");
+int GetNumberFromUser(string message, string errorMessage)
+{
+while(true)
+{
+    Console.Write(message);
+    bool isCorrect = int.TryParse(Console.ReadLine(), out int userNumber);
+    if(isCorrect)
+        return userNumber;
+    Console.WriteLine(errorMessage);
+}
+}
+
+int GetProiz(int n)
+{
+    int proiz = 1;
+    int i = 1;
+    while(i <= n);
+    {
+        proiz = proiz * i;
+        i++;
+    }
+    return proiz;
+}
+
+
+
+
+Задача 30
+/*Напишите программу, которая выводит массив из 8 элементов, заполненный нулями и единицами в случайном порядке.
+[1,0,1,1,0,1,0,0] */
+
+int[] GenMassiv(int count)
+{
+    int[] arr = new int[count];
+    for (int i = 0; i < arr.Length; i++)
+    {
+        arr[i] = new Random().Next(0, 10); 
+    }
+    return arr;
+}
+
+void PrintArr(int[] array)
+{
+    Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        if(i < array.Length-1)
+            Console.Write($"{array[i]}, ");
+        else
+            Console.Write($"{array[i]}");
+    }
+Console.Write("]");
+}
+PrintArr (GenMassiv(10));

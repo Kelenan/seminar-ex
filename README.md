@@ -215,3 +215,123 @@ else if (number2 == a )
      Console.WriteLine("Второе число является квадратом первого");
 else 
     Console.WriteLine("Ни одно число не является квадратом другого"); 
+
+
+
+    Задача 18
+    /*программа, которая по заданному номеру четверти, показывает диапозон возможных координат точек в этой четверти (х и у) */
+
+
+Console.Clear();
+
+int Qvdrnt = GetNumQvdrnt("Введите номер квадранта", "Ошибка ввода данных!");
+PrintRange(Qvdrnt);
+
+Console.WriteLine ("Нажмите любую кнопку");
+Console.ReadLine();
+
+static int GetNumQvdrnt(string MesWelcome, string ErrMes)       //операция ввода номера квадранта
+{
+   while (true)
+   {
+    try
+    {
+         Console.WriteLine(MesWelcome);
+         int NumQvdrnt = int.Parse(Console.ReadLine() ?? "");
+         return NumQvdrnt;
+    }
+    catch (Exception exc)
+    {
+        Console.WriteLine($"{ErrMes} {exc.Message}");
+    }
+   }
+}
+
+static void PrintRange(int Qvdrnt)
+{
+if (Qvdrnt == 1) Console.WriteLine ("X = (0...+oo), Y = (0...+oo)");
+else if (Qvdrnt == 2) Console.WriteLine ("X = (-oo...0), Y = (0...+oo)");
+else if (Qvdrnt == 3) Console.WriteLine ("X = (-oo...0), Y = (-oo...0)");
+else if (Qvdrnt == 4) Console.WriteLine ("X = (0...+oo), Y = (-oo...0)");
+else Console.WriteLine("Неверно введен номер квадрата");
+}
+
+
+
+
+
+Задача 24
+/* Напишите программу, которая
+принимает на вход число (А) и выдаёт сумму
+чисел от 1 до А
+4 -> 10 (1+2+3+4=10)
+7 -> 28
+8 -> 36
+*/
+
+Console.Clear();
+int num = GetNumberFromUser("Введите целое число A: ","Ошибка ввода!");
+int sumNumbers = GetSumNumbers(num);
+Console.WriteLine($"{num} -> {sumNumbers}");
+// Выводит в консоль сообщение message,
+// преобразовывает введённую пользователем строку в число типа int.
+// В случае ошибки выводит в консоль сообщение errorMessage
+int GetNumberFromUser(string message, string errorMessage)
+{
+while(true)
+{
+    Console.Write(message);
+    bool isCorrect = int.TryParse(Console.ReadLine(), out int userNumber);
+    if(isCorrect)
+        return userNumber;
+    Console.WriteLine(errorMessage);
+}
+}
+// Возвращает сумму чисел от 1 до number
+int GetSumNumbers(int number)
+{
+    int sum = 0;
+    while(number > 0);
+    {
+        sum += number;
+        number--;
+    }
+    return sum;
+}
+
+
+
+
+Задача 25 
+/*Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
+3, 5 -> 243 (3⁵)
+2, 4 -> 16
+*/
+int a = GetNumberFromUser("Введите первое число: ", "Ошибка! Введите целое число.");
+int b = GetNumberFromUser("Введите второе число: ", "Ошибка! Введите целое число.");
+int result = GetStepen(a, b);
+
+Console.Write($"{a}, {b} -> {result}");
+
+int GetStepen(int A, int B)
+{
+    int result = A;
+    for (int i = 0; i < B-1; i++)
+    {
+        result = result * A;
+    }
+    return result;
+}
+
+int GetNumberFromUser(string message, string errorMessage)
+{
+    while(true)
+    {
+        Console.Write(message);
+        bool isCorrect = int.TryParse(Console.ReadLine(), out int userNumber);
+        if(isCorrect)
+            return userNumber;
+        Console.WriteLine(errorMessage);
+    }
+}
+

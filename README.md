@@ -688,6 +688,48 @@ int GetNumberFromUser(string message, string errorMessage)
 
 
 
+
+Задача 27
+/*Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
+452 -> 11
+82 -> 10
+9012 -> 12
+*/
+
+int number = GetNumberFromUser("Введите число: ", "Ошибка! Введите целое число."); 
+GetSum(number);
+
+int GetNumberFromUser(string message, string errorMessage)
+{
+    while(true)
+    {
+        Console.Write(message);
+        bool isCorrect = int.TryParse(Console.ReadLine(), out int userNumber);
+        if(isCorrect)
+            return userNumber;
+        Console.WriteLine(errorMessage);
+    }
+}
+
+void GetSum (int num)
+{
+    if (num < 0)
+        num = num * -1;
+int sum = 0;
+int cif = 0;
+
+    while (num > 0)
+    {
+        cif = num % 10;
+        num = num / 10;
+        sum = sum + cif;
+    }
+Console.WriteLine($"{sum}");
+}
+
+
+
+
 Задача 28
 /* Напишите программу, которая
 принимает на вход число N и выдаёт
@@ -723,6 +765,52 @@ int GetProiz(int n)
     }
     return proiz;
 }
+
+
+
+
+Задача 29
+/* Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
+1, 2, 5, 7, 19 -> [1, 2, 5, 7, 19]
+6, 1, 33 -> [6, 1, 33] */
+
+int[] GetMassiv(int count)
+{
+    int[] arr = new int[count];
+    for (int i = 0; i < arr.Length; i++)
+    {
+        arr[i] = GetNumberFromUser($"Введите {i} элемент массива: ", "Ошибка! Введите целое число."); 
+    }
+    return arr;
+}
+
+int GetNumberFromUser(string message, string errorMessage)
+{
+    while(true)
+    {
+        Console.Write(message);
+        bool isCorrect = int.TryParse(Console.ReadLine(), out int userNumber);
+        if(isCorrect)
+            return userNumber;
+        Console.WriteLine(errorMessage);
+    }
+}
+
+void PrintArr(int[] array)
+{
+    Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        if(i < array.Length-1)
+            Console.Write($"{array[i]}, ");
+        else
+            Console.Write($"{array[i]}");
+    }
+Console.Write("]");
+}
+PrintArr (GetMassiv(8));
+
+
 
 
 

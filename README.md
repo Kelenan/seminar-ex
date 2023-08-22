@@ -1312,7 +1312,55 @@ int GetNumberFromUser(string message, string errorMessage)
 
 
 *********************************************************** Задача 41 ************************************************************************************************************************************
+/* Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
+0, 7, 8, -2, -2 -> 2
+-1, -7, 567, 89, 223-> 3 */
 
+
+Console.Clear();
+
+int M = GetNumberFromUser("Напишите сколько чисел вы хотите ввести? ", "Ошибка! Введите целое число.");
+
+int[] array = GetArray(M);
+Console.WriteLine(String.Join(" ", array));
+Console.WriteLine($"Количество элементов больше нуля: {GetPositivSum(array)}");
+
+int GetPositivSum(int[] massiv)
+{
+    int sum = 0;
+    for (int i = 0; i < massiv.Length; i++)
+    {
+        if (massiv[i] > 0)
+            sum++;
+    }
+    return sum;
+}
+
+
+//
+int[] GetArray(int M)
+{
+    int[] res = new int[M];
+    for (int i = 0; i < M; i++)
+    {
+        res[i] = GetNumberFromUser($"Введите {i} элемент массива: ", "Ошибка! Введите целое число.");
+    }
+    return res;
+}
+
+
+//
+int GetNumberFromUser(string message, string errorMessage)
+{
+    while (true)
+    {
+        Console.Write(message);
+        bool isCorrect = int.TryParse(Console.ReadLine(), out int userNumber);
+        if (isCorrect)
+            return userNumber;
+        Console.WriteLine(errorMessage);
+    }
+}
 
 
 
@@ -1323,12 +1371,39 @@ int GetNumberFromUser(string message, string errorMessage)
 
 
 ************************************************************* Задача 43 ************************************************************************************************************************************
+/* Задача 43. Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, 
+y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
+b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5) */
+
+Console.Clear();
+
+double k1 = GetNumberFromUser("Напишите число: ", "Ошибка! Введите целое число.");
+double b1 = GetNumberFromUser("Напишите число: ", "Ошибка! Введите целое число.");
+double k2 = GetNumberFromUser("Напишите число: ", "Ошибка! Введите целое число.");
+double b2 = GetNumberFromUser("Напишите число: ", "Ошибка! Введите целое число.");
+
+double x = (b2 - b1)/(k1 - k2);
+double y = k2 * x + b2;
+
+Console.WriteLine($"х = {x}, y = {y}");
+
+
+double GetNumberFromUser(string message, string errorMessage)
+{
+    while (true)
+    {
+        Console.Write(message);
+        bool isCorrect = double.TryParse(Console.ReadLine(), out double userNumber);
+        if (isCorrect)
+            return userNumber;
+        Console.WriteLine(errorMessage);
+    }
+}
 
 
 
 
-
-************************************************************* Задача 44 ************************************************************************************************************************************
+************************************************************* Задача 44 ?? доделать ************************************************************************************************************************************
 /*Задача 44: Не используя рекурсию, выведите первые N чисел Фибоначчи. Первые два числа Фибоначчи: 0 и 1.
 Если N = 5 -> 0 1 1 2 3
 Если N = 3 -> 0 1 1

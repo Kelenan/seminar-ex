@@ -1430,3 +1430,267 @@ int[] GetFebbanachiArray(int num)
     }
     return array;
 }
+
+
+*****************************************************************Думерные массивы ***************************************************************************************************************************************
+//Двумерные массивы
+/*
+string[,] table = new string[2, 5];  //тип данных стринг, новый тип данных состоящий из 2 строчек и 5 столбцов
+// String.Empty (пустая строка) инициализация строки
+// table[0, 0]  table[0, 1]  table[0, 2]  table[0, 3]  table[0, 4]
+// table[1, 0]  table[1, 1]  table[1, 2]  table[1, 3]  table[1, 4]
+table[1, 2] = "слово"; // для того что бы обратиться к нужному элементу, указываем наименование массива и ИНДЕКС строки, ИНДЕКС столбца
+for (int rows = 0; rows < 2; rows++)
+    for (int columns = 0; columns < 5; columns++)
+        Console.WriteLine($"-{table[rows, columns]}-");
+        
+*/
+/*
+int[,] matrix = new int[3, 4]; //всегда надо указывать размерность массива
+for (int i = 0; i < 3; i++)   // в циклах или методах можно указывать имяМассива.GetLength(0) - 0 это нулевой элемент указанного массива т.е в нашем случае 3
+{
+    for (int j = 0; j < 4; j++) // в циклах или методах можно указывать  имяМассива.GetLength(1) - 1 это 4
+        Console.Write($"{matrix[i, j]} ");
+Console.WriteLine();
+}
+*/
+
+
+
+void PrintArray(int[,] matr)
+{
+    for (int i = 0; i < matr.GetLength(0) ; i++)
+    {
+        for (int j = 0; j < matr.GetLength(1); j++)
+        Console.Write($"{matr[i, j]} ");
+
+    Console.WriteLine();
+    }
+}
+
+void FillAllay(int[,] matr)
+{
+    for (int i = 0; i < matr.GetLength(0) ; i++)
+    {
+        for (int j = 0; j < matr.GetLength(1); j++)
+        matr[i, j] = new Random().Next(1, 10);         //[1; 10)
+    }
+}
+
+int[,] matrix = new int[3, 4];
+PrintArray(matrix);
+FillAllay(matrix);
+Console.WriteLine();
+PrintArray(matrix);
+
+
+
+**************************************************************************** Задача 46 *******************************************************************************************************************************
+/*Задача 46: Задайте двумерный массив размером m×n,
+заполненный случайными целыми числами.
+m = 3, n = 4.
+1 4 8 19
+5 -2 33 -2
+77 3 8 1*/
+
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array = GetArray(rows, columns, 0, 10);
+PrintArray(array);
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.WriteLine($"{inArray[i; j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+
+***************************************************************************** Задача 48*********************************************************************************************************************************
+/* Задача 48: Задайте двумерный массив размера m на n,
+каждый элемент в массиве находится по формуле: Aij = i+j.
+Выведите полученный массив на экран.
+m = 3, n = 4.
+0 1 2 3
+1 2 3 4
+2 3 4 5 */
+
+Console.Clear();
+
+int[,] array = GetArray(3, 4);
+PrintArray(array);
+
+int[,] GetArray(int m, int n)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = i+ j;
+        }
+    }
+    return result;
+}
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+                Console.Write($"{inArray[i, j]} ");
+        }
+         Console.WriteLine();
+    }
+}
+
+
+****************************************************************************Задача 49 ********************************************************************************************************************************
+/* Задача 49: Задайте двумерный массив. Найдите элементы, у
+которых оба индекса нечётные, и замените эти элементы на их
+квадраты.
+*/
+
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array = GetArray(rows, columns, 0, 10);
+PrintArray(array);
+
+Console.WriteLine();
+
+ChangeArray(array);
+PrintArray(array);
+
+
+void ChangeArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            if (i % 2 != 0 && j % 2 != 0)
+                array[i, j] = (int) Math.Pow(array[i, j], 2);
+        }
+    }
+
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+
+********************************************************************** задача 51 **************************************************************************************************************************************
+/* Задача 51: Задайте двумерный массив. Найдите сумму элементов, находящихся на главной диагонали (с индексами
+(0,0); (1;1) и т.д.
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+Сумма элементов главной диагонали: 1+9+2 = 12 */
+
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array = GetArray(rows, columns, 0, 10);
+PrintArray(array);
+
+Console.WriteLine($"{SumDiagonal(array)}");
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+
+int SumDiagonal(int[,] array)
+{
+    int sum =0;
+    int minlangth = array.GetLength(0);
+    if (array.GetLength(1) < array.GetLength(0))
+         minlangth = array.GetLength(1);
+     for (int i = 0; i < minlangth; i++)
+    {
+        sum = sum + array[i, i]; 
+    }
+return sum;
+
+}
+
+***************************************************************************  ************************************************************************************************************************

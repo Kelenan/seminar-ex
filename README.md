@@ -1911,7 +1911,80 @@ void GetReplaceFirstLast(int[,] inArray)
     }
 }
 
+**********************************************************************Задача 54 ************************************************************************************************************************************
+/* Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+В итоге получается вот такой массив:
+7 4 2 1
+9 5 3 2
+8 4 4 2 */
 
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array = GetArray(rows, columns, 0, 10);
+
+PrintArray(array);
+
+Console.WriteLine();
+
+BubbleSort(array);
+PrintArray(array);
+
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+
+//Пузырьковый метод сортировки массива по убыванию
+void BubbleSort(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int k = 0; k < array.GetLength(1) - 1; k++)
+            {
+                if (array[i, k] < array[i, k + 1])
+                {
+                    int temp = array[i, k + 1];
+                    array[i, k + 1] = array[i, k];
+                    array[i, k] = temp;
+                }
+            }
+        }
+    }
+}
 
 ******************************************************************* ЗАДАЧА 55 **************************************************************************************************************************************
 /* Задача 55: Задайте двумерный массив. Напишите программу,
@@ -1982,6 +2055,82 @@ int [] GetCount (int[,] inArray)
     res[1] = inArray.GetLength(1);
     return res;
 }
+
+*******************************************************************Задача 56************************************************************************************************************************************
+/* Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+5 2 6 7
+Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка */
+
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array = GetArray(rows, columns, 0, 10);
+
+PrintArray(array);
+
+Console.WriteLine();
+
+
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+
+//метод подсчета суммы в строке
+int SumRows(int[,] array, int i)
+{
+    int sum = array[i, 0];
+    for (int j = 1; j < array.GetLength(1); j++)
+    {
+        sum += array[i, j];
+    }
+    return sum;
+}
+
+int minSum = 1;
+int sum = SumRows(array, 0);
+for (int i = 1; i < array.GetLength(0); i++)
+{
+    if (sum > SumRows(array, i))
+    {
+        sum = SumRows(array, i);
+        minSum = i + 1;
+    }
+}
+Console.WriteLine($"Строка c наименьшей суммой элементов: { minSum}");
+
+
 
 
 ******************************************************************* Задача 57 **********************************************************************************************************************************
@@ -2066,6 +2215,170 @@ int[,] GetArray(int m, int n, int minValue, int maxValue)
     }
     return result;
 }
+
+
+***********************************************************************************Задача 58*******************************************************************************************************************
+/* Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+Например, даны 2 матрицы:
+2 4 | 3 4
+3 2 | 3 3
+Результирующая матрица будет:
+18 20
+15 18 */
+
+Console.Clear();
+
+Console.Write("Введите количество строк первого массива: ");
+int rows1 = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов первого массива: ");
+int columns1 = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество строк второго массива: ");
+int rows2 = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов второго массива: ");
+int columns2 = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array1 = GetArray(rows1, columns1, 0, 10);
+int[,] array2 = GetArray(rows2, columns2, 0, 10);
+
+PrintArray(array1);
+Console.WriteLine();
+
+PrintArray(array2);
+Console.WriteLine();
+
+int [,] array3 = new int[rows1, columns2];
+
+MultiplyMatrix(array1, array2, array3);
+Console.WriteLine($"Произведение первой и второй матриц:");
+PrintArray(array3);
+
+// метод произведения двух матриц
+void MultiplyMatrix(int[,] array1, int[,] array2, int[,] array3)
+{
+  for (int i = 0; i < array3.GetLength(0); i++)
+  {
+    for (int j = 0; j < array3.GetLength(1); j++)
+    {
+      int sum = 0;
+      for (int k = 0; k < array1.GetLength(1); k++)
+      {
+        sum += array1[i,k] * array2[k,j];
+      }
+      array3[i,j] = sum;
+    }
+  }
+}
+
+
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+
+*********************************************************************************Задача 60 ************************************************************************************************************************
+
+**********************************************************************************Задача 61 ************************************************************************************************************************
+// Дополнительная задача 61: Вывести первые N строк треугольника Паскаля. Сделать вывод в виде равнобедренного треугольника
+
+Console.Clear();
+Console.WriteLine($"Дополнительная задача 61: Вывести первые N строк треугольника Паскаля. Сделать вывод в виде равнобедренного треугольника.");
+
+int n = InputNumbers("Введите количество строк: ");
+
+double[,] pascalTriangle = new double[n + 1, 2 * n + 1];
+
+FillPascalTriangle(pascalTriangle);
+
+Console.WriteLine();
+WriteArray(pascalTriangle);
+
+TransformationPascalTriangle(pascalTriangle);
+
+Console.WriteLine();
+WriteArray(pascalTriangle);
+
+void TransformationPascalTriangle(double[,] array)
+{
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    int count = 0;
+    for (int j = array.GetLength(1) - 1; j >= 0; j--)
+    {
+      if (array[i, j] != 0)
+      {
+        array[i, array.GetLength(1) / 2 + j - count] = array[i, j];
+        array[i, j] = 0;
+        count++;
+      }
+    }
+  }
+  array[array.GetLength(0) - 1, 0] = 1;
+}
+
+void FillPascalTriangle(double[,] pascalTriangle)
+{
+  for (int k = 0; k < pascalTriangle.GetLength(0); k++)
+  {
+    pascalTriangle[k, 0] = 1;
+  }
+  for (int i = 1; i < pascalTriangle.GetLength(0); i++)
+  {
+    for (int j = 1; j < i + 1; j++)
+    {
+      pascalTriangle[i, j] = pascalTriangle[i - 1, j] + pascalTriangle[i - 1, j - 1];
+    }
+  }
+}
+
+void WriteArray(double[,] array)
+{
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+      if (array[i, j] != 0)
+      {
+          Console.Write($"{array[i, j]} ");
+      }
+      else Console.Write("  ");
+    }
+    Console.WriteLine();
+  }
+}
+
+int InputNumbers(string input)
+{
+  Console.Write(input);
+  int output = Convert.ToInt32(Console.ReadLine());
+  return output;
+}
+
+***************************************************************************************Задача 62 *********************************************************************************************************
 
 
 

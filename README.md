@@ -1852,4 +1852,220 @@ void GetMean(int[,]array)
 }
 
 
-******************************************************************** задача **********************************************************************************************************************************
+******************************************************************** задача 53 **********************************************************************************************************************************
+/* Задача 53: Задайте двумерный массив. Напишите программу,
+которая поменяет местами первую и последнюю строку
+массива. */ 
+
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array = GetArray(rows, columns, 0, 10);
+
+PrintArray(array);
+
+Console.WriteLine();
+
+GetReplaceFirstLast(array);
+PrintArray(array);
+
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+void GetReplaceFirstLast(int[,] inArray)
+{
+    int last = inArray.GetLength(0)-1;
+    for (int col = 0; col < inArray.GetLength(1); col++)
+    {
+        int tmp = inArray[0, col];
+        inArray[0, col] = inArray[last, col];
+        inArray[last,col] = tmp;
+    }
+}
+
+
+
+******************************************************************* ЗАДАЧА 55 **************************************************************************************************************************************
+/* Задача 55: Задайте двумерный массив. Напишите программу,
+которая заменяет строки на столбцы. В случае, если это
+невозможно, программа должна вывести сообщение для
+пользователя.*/
+
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine() ?? "");
+
+int[,] array = GetArray(rows, columns, 0, 10);
+
+PrintArray(array);
+
+Console.WriteLine();
+
+int [,] array1 = GetReplaceRowCol(array);
+PrintArray(array1);
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+int [,] GetReplaceRowCol (int[,] inArray)
+{
+    int [] rr = GetCount(inArray);
+    int [,] res = new int[rr[1], rr[0]];
+    for (int col = 0; col < inArray.GetLength(1); col++)
+    {
+        for (int row = 0; row < res.GetLength(1); row++)
+        {
+            res[col, row] = inArray[row, col];
+        }
+    }
+    return res;
+}
+
+int [] GetCount (int[,] inArray)
+{
+    int [] res = new int[2];
+    res[0] = inArray.GetLength(0);
+    res[1] = inArray.GetLength(1);
+    return res;
+}
+
+
+******************************************************************* Задача 57 **********************************************************************************************************************************
+/* Задача 57: Составить частотный словарь элементов двумерного массива. Частотный словарь содержит
+информацию о том, сколько раз встречается элемент входных данных.
+1, 2, 3
+4, 6, 1
+2, 1, 6
+1 встречается 3 раза
+2 встречается 2 раз
+3 встречается 1 раз
+4 встречается 1 раз
+6 встречается 2 раза */
+
+Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите количество столбцов массива: ");
+int colums = int.Parse(Console.ReadLine() ?? "");
+
+Console.WriteLine();
+
+int minValue = 0;
+int maxValue = 10;
+int[,] array = GetArray(rows, colums, minValue, maxValue);
+PrintArray(array);
+
+Console.WriteLine();
+
+int [,] newArray = FreqDict(array);
+PrintArray(newArray);
+
+
+int[,] FreqDict(int[,] inArray)
+{
+    int[,] newArray = new int[maxValue-minValue+1, 2];
+    for (int i = 0; i < newArray.GetLength(0); i++)
+    {
+        newArray[i, 0] = minValue + i;
+    }
+
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+         {
+            for(int k = 0; k < newArray.GetLength(0); k++)
+            {
+                if(newArray[k,0] == inArray[i,j])
+                newArray[k,1] +=1;
+            }
+         }
+    }
+    return newArray;
+}
+
+
+
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+
+

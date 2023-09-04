@@ -2502,5 +2502,167 @@ void PrintArray(int[,] inArray)
     }
 }
 
-*********************************************************************************************************************************************************************************************
+*************************************************************************************Задача 63********************************************************************************************************
+/* Задача 63: Задайте значение N. Напишите программу, которая выведет все натуральные числа в промежутке от 1 до N.
+N = 5 -> "1, 2, 3, 4, 5"
+N = 6 -> "1, 2, 3, 4, 5, 6" */
+
+
+Console.Clear();
+
+Console.Write("Введите число: ");
+int num = int.Parse(Console.ReadLine() ?? "");
+Console.WriteLine(num);
+
+string a1 = GetNatur (1, num);
+
+Console.WriteLine("-----");
+Console.WriteLine(a1);
+
+
+
+string GetNatur (int startNum, int inNum)
+{
+    if (startNum == inNum) return inNum.ToString();
+    return startNum + " " + GetNatur(startNum+1, inNum);
+}
+
+
+
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+
+***************************************************************************** Задача 65 *****************************************************************************************************************
+/* Задача 65: Задайте значения M и N. Напишите программу, которая выведет все натуральные числа в промежутке от M до N.
+M = 1; N = 5 -> "1, 2, 3, 4, 5"
+M = 4; N = 8 -> "4, 5, 6, 7, 8" */
+
+Console.Clear();
+
+Console.Write("Введите первое число: ");
+int start = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите второе число: ");
+int end = int.Parse(Console.ReadLine() ?? "");
+Console.WriteLine($"{start} / {end}");
+
+if (start > end)
+{
+  int tmp = start;
+  start = end;
+  end= tmp;  
+} 
+
+string a1 = GetNatur (start, end);
+
+Console.WriteLine("-----");
+Console.WriteLine(a1);
+
+
+
+string GetNatur (int startNum, int inNum)
+{
+    if (startNum == inNum) return inNum.ToString();
+    return startNum + " " + GetNatur(startNum+1, inNum);
+}
+
+
+
+
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+int[,] GetArray(int m, int n, int minValue, int maxValue)
+{
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return result;
+}
+
+
+************************************************************************ Задача 67 *******************************************************************************************************************
+/* Задача 67: Напишите программу, которая будет принимать на вход число и возвращать сумму его цифр.
+453 -> 12
+45 -> 9 */
+
+Console.Clear();
+
+Console.Write("Введите число: ");
+int numIn = int.Parse(Console.ReadLine() ?? "");
+
+int res = GetSumNum(numIn);
+
+Console.WriteLine($"{numIn} / {res}");
+
+int GetSumNum (int number)
+{
+    if (number == 0) return 0;
+    return number % 10 + GetSumNum(number/10);
+}
+
+
+*************************************************************************** Задача 69 *********************************************************************************************************************
+/* Задача 69: Напишите программу, которая на вход принимает два числа A и B, и возводит число А в целую степень B с помощью рекурсии.
+A = 3; B = 5 -> 243 (3⁵)
+A = 2; B = 3 -> 8 */
+
+Console.Clear();
+
+Console.Write("Введите число A: ");
+int numA = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите число B: ");
+int numB = int.Parse(Console.ReadLine() ?? "");
+
+int res = GetNum(numA, numB);
+
+Console.WriteLine($"{numA} в степени {numB} = {res}");
+
+int GetNum (int A, int B)
+{
+    if (B == 0) return 1;
+    if (B == 1) return A;
+    return A * GetNum(A, B-1);
+}
+
+*******************************************************************************************************************************************************************************************
 

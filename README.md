@@ -2529,31 +2529,32 @@ string GetNatur (int startNum, int inNum)
 
 
 
+***************************************************************************** Задача 64 *****************************************************************************************************************
+/* Задача 64: Задайте значение N. Напишите программу, которая выведет все натуральные числа в промежутке от N до 1. 
+Выполнить с помощью рекурсии.
+N = 5 -> "5, 4, 3, 2, 1"
+N = 8 -> "8, 7, 6, 5, 4, 3, 2, 1" */
 
-void PrintArray(int[,] inArray)
+Console.Clear();
+
+Console.Write("Введите число: ");
+int num = int.Parse(Console.ReadLine() ?? "");
+Console.WriteLine(num);
+
+
+string a1 = GetNatur (num, 1);
+
+Console.WriteLine("-----");
+Console.WriteLine(a1);
+
+
+
+string GetNatur (int startNum, int inNum)
 {
-    for (int i = 0; i < inArray.GetLength(0); i++)
-    {
-        for (int j = 0; j < inArray.GetLength(1); j++)
-        {
-            Console.Write($"{inArray[i, j]} ");
-        }
-        Console.WriteLine();
-    }
+    if (startNum == 1) return inNum.ToString();
+    return startNum + " " + GetNatur(startNum-1, inNum);
 }
 
-int[,] GetArray(int m, int n, int minValue, int maxValue)
-{
-    int[,] result = new int[m, n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            result[i, j] = new Random().Next(minValue, maxValue + 1);
-        }
-    }
-    return result;
-}
 
 
 ***************************************************************************** Задача 65 *****************************************************************************************************************
@@ -2591,32 +2592,42 @@ string GetNatur (int startNum, int inNum)
 }
 
 
+************************************************************************ Задача 66 *******************************************************************************************************************
+/* Задача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
+M = 1; N = 15 -> 120
+M = 4; N = 8. -> 30 */
 
+Console.Clear();
 
-void PrintArray(int[,] inArray)
+Console.Write("Введите число M: ");
+int numM = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите число N: ");
+int numN = int.Parse(Console.ReadLine() ?? "");
+Console.WriteLine($"{numM} / {numN}");
+
+ if (numM > numN)
 {
-    for (int i = 0; i < inArray.GetLength(0); i++)
-    {
-        for (int j = 0; j < inArray.GetLength(1); j++)
-        {
-            Console.Write($"{inArray[i, j]} ");
-        }
-        Console.WriteLine();
-    }
+  int tmp = numM;
+  numM = numN;
+  numN = tmp;  
+} 
+
+int sum1 = 0;
+sum1 = GetNatur(numM, numN);
+
+Console.WriteLine("-----");
+Console.WriteLine(sum1);
+
+
+int GetNatur (int numM, int numN)
+{
+    if (numM == 0 && numN == 0) return 0;
+    if (numM == 1 && numN == 1) return 1;
+    if (numM > numN) return sum1;
+    return numM + GetNatur(numM+1, numN);
 }
 
-int[,] GetArray(int m, int n, int minValue, int maxValue)
-{
-    int[,] result = new int[m, n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            result[i, j] = new Random().Next(minValue, maxValue + 1);
-        }
-    }
-    return result;
-}
 
 
 ************************************************************************ Задача 67 *******************************************************************************************************************
@@ -2638,6 +2649,32 @@ int GetSumNum (int number)
     if (number == 0) return 0;
     return number % 10 + GetSumNum(number/10);
 }
+
+
+
+************************************************************************ Задача 68 *******************************************************************************************************************
+/* Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.
+m = 2, n = 3 -> A(m,n) = 9
+m = 3, n = 2 -> A(m,n) = 29*/
+
+Console.Clear();
+
+Console.Write("Введите число M: ");
+int numM = int.Parse(Console.ReadLine() ?? "");
+
+Console.Write("Введите число N: ");
+int numN = int.Parse(Console.ReadLine() ?? "");
+Console.WriteLine($"{numM} / {numN}");
+
+Console.WriteLine(GetAkkerman (numM, numN));
+
+int GetAkkerman(int m, int n)
+    {
+        if (m == 0) return n+1;
+        if (m > 0 && n == 0) return GetAkkerman(m - 1, 1);
+        if (m > 0 && n > 0) return GetAkkerman(m - 1, GetAkkerman(m, n - 1));
+        return 0;
+    }
 
 
 *************************************************************************** Задача 69 *********************************************************************************************************************
